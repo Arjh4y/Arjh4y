@@ -1,4 +1,4 @@
-<h2 align="center">Hello World!, My name is RJ, and I'm a student👋</h2>
+<h2 align="center">Hello Kupal!/h2>
 
 ###
 
@@ -20,7 +20,7 @@
 
 ###
 
-<p align="center">As a student, I am constantly seeking opportunities to expand my knowledge, acquire new skills, and deepen my understanding of various subjects through continuous practice and exploration.</p>
+<p align="center">Trip trip lang HAHAHA</p>
 
 ###
 
