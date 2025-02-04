@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi Crush -Wido</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 500px;
+            transition: all 0.3s;
+        }
+
+        .question h1 {
+            font-size: 2em;
+            color: #ff4d6a;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .no {
+            background-color: #ff4d6a;
+            color: white;
+        }
+
+        .yes {
+            background-color: #4db8ff;
+            color: white;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        .images-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .image {
+            width: 80%;
+            max-width: 400px;
+            margin: 10px 0;
+            border-radius: 15px;
+            opacity: 1;
+            animation: slideRight 3s linear infinite;
+        }
+
+        .love-message {
+            font-size: 2.0em;
+            color: #ff4d6a;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes slideLoop {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            .question h1 {
+                font-size: 2em;
+            }
+
+            .button {
+                font-size: 1em;
+                padding: 12px 20px;
+            }
+
+            .image {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            width: 200%;
+            animation: slideLoop 10s linear infinite;
+        }
+
+        .image {
+            width: 150px;
+            height: 150px;
+            margin: 0 10px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(45deg, #ff0000, #ff4d4d, #ff7373);
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+        }
+
+        a:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff4d4d, #ff0000, #cc0000);
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">
+            <h1>Will you be my Valentine? 💖</h1>
+        </div>
+        <div class="buttons">
+            <button id="noButton" class="button no">NO</button>
+            <button id="yesButton" class="button yes">YES</button>
+        </div>
+        <div class="carousel-wrapper">
+            <div id="carouselContainer" class="carousel-container"></div>
+            <br>
+
+            <a href="flowers.html">CLICK ME</a>
+        </div>
+    </div>
+
+    <script>
+         const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+        const carouselContainer = document.getElementById('carouselContainer');
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        const container = document.querySelector('.container');
+        let yesScale = 1;
+
+        noButton.addEventListener('click', () => {
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${Math.random() * 80}%`;
+            noButton.style.top = `${Math.random() * 80}%`;
+            yesScale += 0.2;
+            yesButton.style.transform = `scale(${yesScale})`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            document.querySelector('.question').style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            
+            const loveMessage = document.createElement('div');
+            loveMessage.className = 'love-message';
+            loveMessage.textContent = 'I love you! 💖';
+            container.insertBefore(loveMessage, carouselWrapper);
+            
+            carouselWrapper.style.display = 'block';
+
+            const images = Array.from({length: 8}, (_, i) => `image${i+1}.jpg`);
+            
+            const allImages = [...images, ...images];
+
+            allImages.forEach((src) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Valentine Image';
+                img.className = 'image';
+                carouselContainer.appendChild(img);
+            });
+        });
+    </script>
+</body>
+</html>
